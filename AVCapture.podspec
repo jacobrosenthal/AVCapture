@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.name         = "AVCapture"
   s.version      = "0.0.1"
   s.summary      = "Capture video and audio"
+  s.homepage     = 'https://developer.apple.com/library/mac/samplecode/AVRecorder/Listings/AVRecorder_AVCaptureDeviceFormat_AVRecorderAdditions_h.html'
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -65,7 +66,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://jacobrosenthal/AVCapture.git", :tag => "#{s.version}" }
+  s.source           = { :git => "https://github.com/jacobrosenthal/AVCapture.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
