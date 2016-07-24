@@ -85,7 +85,8 @@
 {
 	self = [super init];
 	if (self) {
-		
+		__weak AVRecorderDocument *weakSelf = self;
+
 		// Capture Notification Observers
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 		id runtimeErrorObserver = [notificationCenter addObserverForName:AVCaptureSessionRuntimeErrorNotification
@@ -93,7 +94,7 @@
 																   queue:[NSOperationQueue mainQueue]
 															  usingBlock:^(NSNotification *note) {
 																  dispatch_async(dispatch_get_main_queue(), ^(void) {
-																	  [self presentError:[[note userInfo] objectForKey:AVCaptureSessionErrorKey]];
+																	  [weakSelf presentError:[[note userInfo] objectForKey:AVCaptureSessionErrorKey]];
 																  });
 															  }];
 		id didStartRunningObserver = [notificationCenter addObserverForName:AVCaptureSessionDidStartRunningNotification
@@ -112,13 +113,13 @@
 																		object:nil
 																		 queue:[NSOperationQueue mainQueue]
 																	usingBlock:^(NSNotification *note) {
-																		[self refreshDevices];
+																		[weakSelf refreshDevices];
 																	}];
 		id deviceWasDisconnectedObserver = [notificationCenter addObserverForName:AVCaptureDeviceWasDisconnectedNotification
 																		   object:nil
 																			queue:[NSOperationQueue mainQueue]
 																	   usingBlock:^(NSNotification *note) {
-																		   [self refreshDevices];
+																		   [weakSelf refreshDevices];
 																	   }];
 		observers = [[NSArray alloc] initWithObjects:runtimeErrorObserver, didStartRunningObserver, didStopRunningObserver, deviceWasConnectedObserver, deviceWasDisconnectedObserver, nil];
 		
